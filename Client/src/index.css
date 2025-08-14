@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    margin: 15px;
+    margin-left: 30px;
+}
