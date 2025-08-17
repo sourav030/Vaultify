@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { BankContext } from "../context/Context";
 
 const DepositMoney = () => {
-  const { accountId, token } = useContext(BankContext); // ✅ corrected typo
+  const { accoutId, token } = useContext(BankContext); // ✅ corrected typo
   const [amount, setAmount] = useState("");
 
   const MoneyHandler = async () => {
@@ -16,7 +16,7 @@ const DepositMoney = () => {
     try {
       const res = await axios.post(
         "http://localhost:5000/acount/api/v1/credit",
-        { amount: Number(amount), accountId },
+        { amount: Number(amount), accoutId },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -30,10 +30,11 @@ const DepositMoney = () => {
       setAmount(""); // reset input
 
     } catch (err) {
-      console.error(err);
+      console.error(err.message);
       toast.error("❌ Deposit Money Unsuccessful");
     }
   };
+
 
   return (
     <div className="bg-gradient-to-br from-blue-200 to-blue-400 h-screen flex items-center justify-center px-4">

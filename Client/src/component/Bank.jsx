@@ -23,6 +23,7 @@ const Bank = ({ bank_id, bank_name, image_url }) => {
       );
       console.log("Account Created:", res.data);
       setAccountId(res.data.insertId)
+      localStorage.setItem('accoutId',res.data.insertId)
       toast.success("🎉 Account created successfully!");
     } catch (err) {
       toast.error("❌ Failed to create account");
@@ -30,9 +31,7 @@ const Bank = ({ bank_id, bank_name, image_url }) => {
     }
   };
 
-  useEffect(()=>{
-    console.log(accoutId)
-  },[accoutId])
+  
 
   return (
     <div

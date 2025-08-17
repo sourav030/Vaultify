@@ -10,10 +10,19 @@ import "react-toastify/dist/ReactToastify.css";
 import { useContext } from 'react';
 const App = () => {
   
-  const {token,setToken}=useContext(BankContext)
+  const {token,setToken,accoutId,setAccountId}=useContext(BankContext)
   useEffect(()=>{
     setToken(localStorage.getItem('token'))
   },[])
+
+  useEffect(()=>{
+    setAccountId(localStorage.getItem('accoutId'))
+    console.log(localStorage.getItem('accoutId'))
+  },[])
+
+ 
+
+
   return (
     <div>
       <Navbar />

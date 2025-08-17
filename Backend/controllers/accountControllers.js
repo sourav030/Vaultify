@@ -7,8 +7,8 @@ const createAccount = async (req, res) => {
 
     try {
         const [existing] = await pool.query(
-            'SELECT * FROM accounts WHERE user_id = ? AND bank_id = ?',
-            [user_id, bank_id]
+            'SELECT * FROM accounts WHERE user_id = ? ',
+            [user_id]
         );
 
         if (existing.length >= 1) {
@@ -65,6 +65,8 @@ const credit = async (req, res) => {
     const type = 'credit';
 
     try {
+        console.log("accountId:", accoutId, "user_id:", user_id);
+
         const [account] = await pool.query(
             'SELECT * FROM accounts WHERE account_id = ? AND user_id = ?',
             [accoutId, user_id]
@@ -73,12 +75,12 @@ const credit = async (req, res) => {
         if (account.length === 0) {
             return res.status(404).json({ message: 'Account not found or unauthorized' });
         }
+      
 
         await pool.query(
             'UPDATE accounts SET balance = balance + ? WHERE account_id = ?',
             [amount, accoutId]
         );
-
 
 
         return res.status(200).json({ message: `Credited ₹${amount} successfully.` });
