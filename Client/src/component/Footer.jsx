@@ -1,44 +1,53 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-200 text-gray-700 py-8">
-      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className=" shadow-2xl h-full w-screen  text-gray-900 py-10">
+      <div className=" h-full container mx-auto px-6 flex justify-around">
 
         {/* Brand */}
         <div>
-          <h2 className="text-xl font-bold">Vaultify App</h2>
-          <p className="text-sm mt-2">
+          <h2 className="text-2xl font-bold text-white">Vaultify App</h2>
+          <p className="text-sm mt-3 text-gray-800 leading-relaxed">
             Your secure way to manage money, loans, and transfers with confidence.
           </p>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h3 className="font-semibold mb-2">Quick Links</h3>
-          <ul className="space-y-1">
-            <li><NavLink to="/" className="hover:underline">Home</NavLink></li>
-            <li><NavLink to="/Deposit-Money" className="hover:underline">Deposit Money</NavLink></li>
-            <li><NavLink to="/Loan" className="hover:underline">Loan</NavLink></li>
-            <li><NavLink to="/Transfer-Money" className="hover:underline">Transfer Money</NavLink></li>
-            <li><NavLink to="/Account" className="hover:underline">Account</NavLink></li>
+          <h3 className="text-lg font-semibold text-white mb-3">Quick Links</h3>
+          <ul className="space-y-2">
+            <li>
+              <NavLink to="/" className="hover:text-amber-400 transition-colors">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/Deposit-Money" className="hover:text-amber-400 transition-colors">Deposit Money</NavLink>
+            </li>
+            <li>
+              <NavLink to="/Loan" className="hover:text-amber-400 transition-colors">Loan</NavLink>
+            </li>
+            <li>
+              <NavLink to="/Transfer-Money" className="hover:text-amber-400 transition-colors">Transfer Money</NavLink>
+            </li>
+            <li>
+              <NavLink to="/Account" className="hover:text-amber-400 transition-colors">Account</NavLink>
+            </li>
           </ul>
         </div>
 
         {/* Contact */}
         <div>
-          <h3 className="font-semibold mb-2">Contact Us</h3>
-          <p>Email: support@vaultify.com</p>
-          <p>Phone: +91-1234567890</p>
-          <p>Address: Chandigarh, India</p>
+          <h3 className="text-lg font-semibold text-white mb-3">Contact Us</h3>
+          <p className="flex items-center gap-2"><FaEnvelope /> support@vaultify.com</p>
+          <p className="flex items-center gap-2"><FaPhoneAlt /> +91-1234567890</p>
+          <p className="flex items-center gap-2"><FaMapMarkerAlt /> Chandigarh, India</p>
         </div>
       </div>
 
       {/* Bottom */}
-      <div className="text-center text-sm mt-8 border-t border-gray-300 pt-4">
-        © {new Date().getFullYear()} Vaultify App. All rights reserved.
-      </div>
+      /
     </footer>
   );
 };

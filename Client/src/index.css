@@ -9,3 +9,7 @@ body{
     margin: 15px;
     margin-left: 30px;
 }
+
+html {
+  scroll-behavior: smooth;
+}

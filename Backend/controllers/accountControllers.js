@@ -15,12 +15,16 @@ const createAccount = async (req, res) => {
             return res.status(400).json({ message: 'Account already exists in this bank.' });
         }
 
-        await pool.query(
+        const [result] = await pool.query(
             'INSERT INTO accounts (user_id, bank_id, balance, account_type) VALUES (?, ?, ?, ?)',
             [user_id, bank_id, balance, account_type]
         );
 
-        return res.status(201).json({ message: 'User account created successfully.' });
+        return res.status(201).json({
+            message: 'User account created successfully.',
+            insertId: result.insertId   // 👈 naye record ka ID bhejna best hai
+        });
+
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server Side Error' });
@@ -56,14 +60,14 @@ const deleteAccount = async (req, res) => {
 
 // -----------------------------------------------------------------Credit Amount---------------------------------------
 const credit = async (req, res) => {
-    const { account_id, amount } = req.body;
+    const { accoutId, amount } = req.body;
     const user_id = req.user.id;
     const type = 'credit';
 
     try {
         const [account] = await pool.query(
             'SELECT * FROM accounts WHERE account_id = ? AND user_id = ?',
-            [account_id, user_id]
+            [accoutId, user_id]
         );
 
         if (account.length === 0) {
@@ -72,7 +76,7 @@ const credit = async (req, res) => {
 
         await pool.query(
             'UPDATE accounts SET balance = balance + ? WHERE account_id = ?',
-            [amount, account_id]
+            [amount, accoutId]
         );
 
 
@@ -117,8 +121,8 @@ const debit = async (req, res) => {
 
 //---------------------------------------------------------Transaction -------------------------------------------------------
 const transaction = async (req, res) => {
-    const { receiver_account_id, amount,sender_account_id } = req.body;
-    
+    const { receiver_account_id, amount, sender_account_id } = req.body;
+
 
     const connection = await pool.getConnection();
     await connection.beginTransaction();
