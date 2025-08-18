@@ -15,13 +15,6 @@ const App = () => {
     setToken(localStorage.getItem('token'))
   },[])
 
-  useEffect(()=>{
-    setAccountId(localStorage.getItem('accoutId'))
-    console.log(localStorage.getItem('accoutId'))
-  },[])
-
- 
-
 
   return (
     <div>

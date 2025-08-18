@@ -7,7 +7,8 @@ const {
     deleteAccount,
     credit,
     debit,
-    transaction
+    transaction,
+    GETUser
 } = require('../controllers/accountControllers');
 
 // Routes
@@ -16,5 +17,6 @@ accountRoute.delete('/deleteAccount/:account_id',authentication, deleteAccount);
 accountRoute.post('/credit',authentication, credit);
 accountRoute.post('/debit',authentication, debit);
 accountRoute.post('/transaction',authentication,transaction);
+accountRoute.get('/account',authentication,GETUser);
 
 module.exports = accountRoute;

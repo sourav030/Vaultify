@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { BankContext } from "../context/Context";
 
 const DepositMoney = () => {
-  const { accoutId, token } = useContext(BankContext); // ✅ corrected typo
+  const { accoutId, token ,setAccountId} = useContext(BankContext); // ✅ corrected typo
   const [amount, setAmount] = useState("");
 
   const MoneyHandler = async () => {
@@ -35,6 +35,25 @@ const DepositMoney = () => {
     }
   };
 
+   useEffect(() => {
+      const fetchAccount = async () => {
+        try {
+          const res = await axios.get("http://localhost:5000/acount/api/v1/account",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          setAccountId(res.data.account[0].account_id);
+          console.log("mera id hai",res.data)
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      fetchAccount()
+    },[])
 
   return (
     <div className="bg-gradient-to-br from-blue-200 to-blue-400 h-screen flex items-center justify-center px-4">

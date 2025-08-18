@@ -9,8 +9,8 @@ const Context = ({ children }) => {
   const [balance, setBalance] = useState();
   const [login, setLogin] = useState(false);
   const [token, setToken] = useState(null);
-  const [accoutId,setAccountId]=useState();
-  
+  const [accoutId, setAccountId] = useState();
+
 
   // ✅ Banks state for storing API data
   const [banks, setBanks] = useState([]);
@@ -22,10 +22,10 @@ const Context = ({ children }) => {
         const res = await axios.get("http://localhost:5000/bank/api/v1/getAllBank");
 
         // API ka data object hai -> isko array banate hain
-        
-        
+
+
         setBanks(res.data.data);
-       
+
       } catch (error) {
         console.error("Error fetching banks:", error);
       }
@@ -35,9 +35,14 @@ const Context = ({ children }) => {
   }, [banks]);
 
 
+ 
+
+
+
+
   return (
     <BankContext.Provider
-      value={{ balance, setBalance, login, setLogin, token, setToken, banks ,accoutId,setAccountId}}
+      value={{ balance, setBalance, login, setLogin, token, setToken, banks, accoutId, setAccountId }}
     >
       {children}
     </BankContext.Provider>

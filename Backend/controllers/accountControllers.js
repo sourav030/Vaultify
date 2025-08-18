@@ -75,7 +75,7 @@ const credit = async (req, res) => {
         if (account.length === 0) {
             return res.status(404).json({ message: 'Account not found or unauthorized' });
         }
-      
+
 
         await pool.query(
             'UPDATE accounts SET balance = balance + ? WHERE account_id = ?',
@@ -187,10 +187,33 @@ const transaction = async (req, res) => {
 };
 
 
+//-------------------------------------------------GET A USER ACCOUNT ID-------------------------------------------
+
+const GETUser = async (req, res) => {
+    const user_id = req.user.id;
+    try {
+        const [account] = await pool.query(
+            'SELECT * FROM accounts WHERE  user_id = ?',
+            [user_id]
+        );
+
+        if (account.length === 0) {
+            return res.status(404).json({ message: 'Account not found or unauthorized' });
+        }
+
+        return res.status(200).json({message:"This is you accountId", account});
+
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Server Side error" })
+    }
+}
+
 module.exports = {
     createAccount,
     deleteAccount,
     credit,
     debit,
-    transaction
+    transaction,
+    GETUser
 };
